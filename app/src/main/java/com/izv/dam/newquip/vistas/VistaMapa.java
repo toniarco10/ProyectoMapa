@@ -135,7 +135,7 @@ public class VistaMapa extends FragmentActivity
 
     @Override
     public void onLocationChanged(Location location) {
-        
+
     }
 
 
@@ -160,11 +160,7 @@ public class VistaMapa extends FragmentActivity
                 Toast.makeText(this, "Sin datos", Toast.LENGTH_SHORT).show();
             }
 
-            LocationRequest mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(100000);
-            mLocationRequest.setFastestInterval(50000);
-            mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-            LocationServices.FusedLocationApi.requestLocationUpdates(GoogleApiClient, mLocationRequest, this);
+
         }
     }
 }

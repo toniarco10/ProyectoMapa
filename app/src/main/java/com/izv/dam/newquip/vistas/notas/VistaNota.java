@@ -125,17 +125,9 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         if (r > 0 & nota.getId() == 0) {
             nota.setId(r);
         }
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            System.out.println("Dentro de los permisos");
-            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(GoogleApiClient);
-            //Toast.makeText(this, mLastLocation.getLatitude()+" y "+mLastLocation.getLongitude(), Toast.LENGTH_LONG).show();
-            latitud = mLastLocation.getLatitude();
-            longitud = mLastLocation.getLongitude();
-
-            Localizador l = new Localizador(nota.getId(), latitud, longitud);
-            simpleDao.create(l);
-        }
+        
+        Localizador l = new Localizador(nota.getId(), latitud, longitud);
+        simpleDao.create(l);
     }
 
     @Override
@@ -171,6 +163,12 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
             Toast.makeText(this, mLastLocation.getLatitude()+" y "+mLastLocation.getLongitude(), Toast.LENGTH_LONG).show();
             latitud = mLastLocation.getLatitude();
             longitud = mLastLocation.getLongitude();
+
+            LocationRequest mLocationRequest = new LocationRequest();
+            mLocationRequest.setInterval(1000);
+            mLocationRequest.setFastestInterval(500);
+            mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+            LocationServices.FusedLocationApi.requestLocationUpdates(GoogleApiClient, mLocationRequest, this);
         }
     }
 
