@@ -125,7 +125,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         if (r > 0 & nota.getId() == 0) {
             nota.setId(r);
         }
-        
+
         Localizador l = new Localizador(nota.getId(), latitud, longitud);
         simpleDao.create(l);
     }
@@ -160,7 +160,6 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
     public void getLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(GoogleApiClient);
-            Toast.makeText(this, mLastLocation.getLatitude()+" y "+mLastLocation.getLongitude(), Toast.LENGTH_LONG).show();
             latitud = mLastLocation.getLatitude();
             longitud = mLastLocation.getLongitude();
 
